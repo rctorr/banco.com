@@ -13,6 +13,8 @@ from django.contrib.auth.models import User
 
 class Cliente(models.Model):
     """ Define la tabla Cliente """
+    user = models.OneToOneField(User, on_delete=models.CASCADE,
+        null=True, blank=True)
     fechaNacimiento = models.DateField(null=True, blank=True)
     GENERO = [
         ("H", "Hombre"),  # <- opcion
@@ -27,9 +29,7 @@ class Cliente(models.Model):
     tipo = models.CharField(max_length=2, choices=TIPO, null=True, blank=True)  # VARCHAR(2)
 
     def __str__(self):
-        for opcion in self.GENERO:
-            if opcion[0] == self.genero:
-                return opcion[1]
+        return self.user.username
 
 
 class Tarjeta(models.Model):

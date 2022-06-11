@@ -3,7 +3,7 @@ from .models import Cliente, Tarjeta, ClienteTarjeta
 
 class ClienteAdmin(admin.ModelAdmin):
     # Se sobre escribe lo que hace __str__
-    list_display = ("id", "fechaNacimiento", "genero", "tipo")
+    list_display = ("id", "user", "fechaNacimiento", "genero", "tipo")
 
 
 class TarjetaAdmin(admin.ModelAdmin):

@@ -1,0 +1,46 @@
+{% extends "banco_app/base.html" %}
+{% load static %}
+
+{% block contenido %}
+    <div class="page-heading header-text">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12">
+            <h1>Portal Bancario</h1>
+            <span>Toda una sucursal al alcance de un click</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="single-services mb-4">
+      <div class="container">
+        <h2 class="mb-4">Mis tarjetas</h2>
+        <div class="row" id="tabs">
+          <div class="col-md-4">
+            <ul>
+              {% for tarj_user in tarjetas %}
+              <li>
+                <a href='#tabs-{{ forloop.counter }}'>
+                  {{ tarj_user.tarjeta.nombre }}<i class="fa fa-angle-right"></i>
+                </a>
+              </li>
+              {% endfor %}
+            </ul>
+          </div>
+          <div class="col-md-8">
+            <section class='tabs-content'>
+              {% for tarj_user in tarjetas %}
+              <article id='tabs-{{ forloop.counter }}'>
+                <img src="{% static 'banco_app/images/single_service_01.jpg' %}" alt="">
+                <h4>{{ tarj_user.tarjeta.nombre }}</h4>
+                <h5>{{ tarj_user.numeroTarjeta }}</h5>
+                <p>{{ tarj_user.tarjeta.descripcion }}</p>
+              </article>
+              {% endfor %}
+            </section>
+          </div>
+        </div>
+      </div>
+    </div>
+{% endblock %}
