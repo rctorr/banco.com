@@ -1,0 +1,43 @@
+{% extends "banco_app/base.html" %}
+{% load static %}
+
+{% block contenido %}
+    <div class="page-heading header-text">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12">
+            <h1>Nuestras Tarjetas</h1>
+            <span>Contamos con 20 años de experiencia</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="single-services">
+      <div class="container">
+        <h3 class="mb-3">Tarjetas disponibles</h3>
+          <ul class="list-group">
+            {% for t in tarjetas %}
+            <li class="list-group-item">
+              <h4 class="mb-1">{{ t.nombre }}</h4>
+              <p>{{ t.descripcion }}</p>
+            </li>
+            {% endfor %}
+          </ul>
+      </div>
+    </div>
+
+    <div class="partners">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="owl-partners owl-carousel">
+              <div class="partner-item">
+                <img src="images/client-01.png" alt="">
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+{% endblock %}
