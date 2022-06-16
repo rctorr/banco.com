@@ -15,8 +15,20 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+from rest_framework import routers
+
+from banco_app import views
+
+# Agregando rutas para django rest
+router = routers.DefaultRouter()
+router.register(r'users', views.UserViewSet)  # /api/users -> UserViewSet()
 
 urlpatterns = [
     path('', include("banco_app.urls")),
     path('admin/', admin.site.urls),
+
+    # Rutas para la url /api/
+    path("api/", include(router.urls)),
+    # Rutas para la autenticación url /api/auth/
+    path("api/auth/", include("rest_framework.urls", namespace="rest_framework")),
 ]

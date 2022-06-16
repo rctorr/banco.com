@@ -1,7 +1,11 @@
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.models import User
 from django.shortcuts import render, redirect
+from rest_framework import viewsets
+
 from .models import Tarjeta, ClienteTarjeta
+from .serializers import UserSerializer
 
 def index(request):
     """ Vista o función que atiende la url GET / """
@@ -30,6 +34,20 @@ def portal(request):
             "tarjetas": tarjetas_usuario,
         }
     )
+
+
+class UserViewSet(viewsets.ModelViewSet):
+   """
+   API que permite realizar operaciones en la tabla User con url /api/users
+   """
+   # Se define el conjunto de datos sobre el que va a operar la vista,
+   # en este caso sobre todos los usuarios disponibles.
+   queryset = User.objects.all().order_by('id')
+
+   # Se define el Serializador encargado de transformar la peticiones
+   # en formato JSON a objetos de Django y de Django a JSON.
+   serializer_class = UserSerializer
+
 
 # def login_user(request):
 #     """ Vista o función que atiende la url GET, POST /login/ """
