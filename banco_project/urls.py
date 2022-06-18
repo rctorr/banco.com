@@ -22,6 +22,9 @@ from banco_app import views
 # Agregando rutas para django rest
 router = routers.DefaultRouter()
 router.register(r'users', views.UserViewSet)  # /api/users -> UserViewSet()
+router.register(r'clientetarjeta', views.ClienteTarjetaViewSet)  # /api/clientetarjeta -> ClienteTarjetaViewSet()
+router.register(r'cliente', views.ClienteViewSet)  # /api/cliente -> ClienteViewSet()
+router.register(r'tarjeta', views.TarjetaViewSet)  # /api/tarjeta -> TarjetaViewSet()
 
 urlpatterns = [
     path('', include("banco_app.urls")),

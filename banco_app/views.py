@@ -4,8 +4,9 @@ from django.contrib.auth.models import User
 from django.shortcuts import render, redirect
 from rest_framework import viewsets
 
-from .models import Tarjeta, ClienteTarjeta
-from .serializers import UserSerializer
+from .models import Tarjeta, ClienteTarjeta, Cliente
+from .serializers import (UserSerializer, ClienteTarjetaSerializer, ClienteSerializer,
+    TarjetaSerializer)
 
 def index(request):
     """ Vista o función que atiende la url GET / """
@@ -48,6 +49,47 @@ class UserViewSet(viewsets.ModelViewSet):
    # en formato JSON a objetos de Django y de Django a JSON.
    serializer_class = UserSerializer
 
+
+class ClienteTarjetaViewSet(viewsets.ModelViewSet):
+   """
+   API que permite realizar operaciones en la tabla ClienteTarjeta con url
+   /api/clientetarjeta
+   """
+   # Se define el conjunto de datos sobre el que va a operar la vista,
+   # en este caso sobre la tabla ClienteTarjeta
+   queryset = ClienteTarjeta.objects.all().order_by('id')
+
+   # Se define el Serializador encargado de transformar la peticiones
+   # en formato JSON a objetos de Django y de Django a JSON.
+   serializer_class = ClienteTarjetaSerializer
+
+
+class ClienteViewSet(viewsets.ModelViewSet):
+   """
+   API que permite realizar operaciones en la tabla Cliente con url
+   /api/cliente
+   """
+   # Se define el conjunto de datos sobre el que va a operar la vista,
+   # en este caso sobre la tabla ClienteTarjeta
+   queryset = Cliente.objects.all().order_by('id')
+
+   # Se define el Serializador encargado de transformar la peticiones
+   # en formato JSON a objetos de Django y de Django a JSON.
+   serializer_class = ClienteSerializer
+
+
+class TarjetaViewSet(viewsets.ModelViewSet):
+   """
+   API que permite realizar operaciones en la tabla Tarjeta con url
+   /api/tarjeta
+   """
+   # Se define el conjunto de datos sobre el que va a operar la vista,
+   # en este caso sobre la tabla ClienteTarjeta
+   queryset = Tarjeta.objects.all().order_by('id')
+
+   # Se define el Serializador encargado de transformar la peticiones
+   # en formato JSON a objetos de Django y de Django a JSON.
+   serializer_class = TarjetaSerializer
 
 # def login_user(request):
 #     """ Vista o función que atiende la url GET, POST /login/ """
